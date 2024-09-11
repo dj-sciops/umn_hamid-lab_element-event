@@ -211,3 +211,21 @@ class AlignmentEvent(dj.Manual):
     -> EventType.proj(end_event_type='event_type')   # event after alignment_event_type
     end_time_shift: float                            # (s) WRT end_event_type
     """
+
+
+@schema
+class BehaviorTimeSeries(dj.Imported):
+    definition = """
+    -> event.BehaviorRecording
+    ---
+    sampling_rate=null: float         # sampling rate of the analog signal acquisition system
+    behavior_timestamps: longblob  # timestamps (s) for each analog trace
+    """
+
+    class Trace(dj.Part):
+        definition = """
+        -> master
+        trace_name: varchar(32)  # name of the analog signal (e.g. Licks)
+        ---
+        trace: longblob  # signal amplitude over time
+        """
