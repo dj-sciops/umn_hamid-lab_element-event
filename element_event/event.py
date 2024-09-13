@@ -133,7 +133,7 @@ class BehaviorRecording(dj.Manual):
 
         definition = """
         -> master
-        filepath              : varchar(64)
+        filepath              : varchar(255)
         """
 
 
